@@ -16,31 +16,34 @@ For more details, please refer to these documentations https://goethereumbook.or
 
 ### Solc installation
 
-Check this link to install the required solc version - https://docs.soliditylang.org/en/latest/installing-solidity.html.
+Please check this link to install the required solc version - https://docs.soliditylang.org/en/latest/installing-solidity.html.
 
 ### Go installation
 
+> [!IMPORTANT]
+> If your machine already has Go installed, then please proceed to the **Cloning repository** step.
+
 1. Download the latest Go version from https://go.dev/doc/install.
-2. Make a directory `GoProjects` for your Go project development in your machine.
-3. Make 3 directories `/GoProjects/src`, `/GoProjects/pkg` and `/GoProjects/bin`.
-4. Set up the GOPATH env variable in your `.bash_profile` or `.zshrc` file -
+
+2. Create a directory `GoProjects` for your Go project development on your machine. Please run `pwd` inside `GoProjects` directory to get the full path. This will be used in **Step 4** to set the $GOPATH env variable.
+
+3. Create 3 directories `/GoProjects/src`, `/GoProjects/pkg` and `/GoProjects/bin`.
+
+4. Set up the `$GOPATH` env variable on your machine -
+
+- Run `nano ~/.zshrc` on Mac machines.
+- Run `nano ~/.bash_profile` on Linux machines.
+- Paste the following lines -
 
 ```sh
 export GOPATH=<PATH_TO_YOUR_GO_PROJECTS_DIRECTORY>
 export PATH=$GOPATH/bin:$PATH
 ```
 
-5. Save your `.bash_profile` or `.zshrc` file.
+5. Save your `~/.bash_profile` or `~/.zshrc` file.
 
-```sh
-source .bash_profile
-```
-
-OR
-
-```sh
-source .zshrc
-```
+- Run `source ~/.zshrc` on Mac machines.
+- Run `source ~/.bash_profile` on Linux machines.
 
 6. Run `echo $GOPATH` to check if the GOPATH is set correctly in the machine.
 
@@ -50,13 +53,17 @@ Neon EVM doesn't support the latest JSON-RPC specifications. Therefore Neon EVM 
 
 ## Cloning repository
 
-Run command
+1. Navigate to the `src` directory of your GOPATH.
 
 ```sh
-git clone https://github.com/neonlabsorg/neon-tutorials.git
+cd $GOPATH/src
 ```
 
-**NOTE:** Please copy the directory `go-ethereum` and place it inside your `GoProjects/src` directory (Go applications run from inside the GOPATH).
+2. Run command
+
+```sh
+git clone https://github.com/neonlabsorg/go-ethereum-tutorial.git
+```
 
 ## Install the required libraries
 
@@ -69,10 +76,11 @@ go mod tidy
 
 Rename `.env.example` to `.env` and place your private key inside it.
 
-> [!IMPORTANT]
-> If you want to deploy only one of the smart contracts, then please comment out the other smart contract function calls in the `main.go` file.
-
 ## Interact with the **Storage** smart contract
+
+> [!IMPORTANT]
+> To run only the Storage contract, please comment out the following line in `main.go` -
+> `deploy.RunTestERC20Contract()`
 
 Run the following command to deploy the Storage contract, store a value in the deployed smart contract and reading the value from the deployed smart contract.
 
@@ -105,6 +113,10 @@ Returned value: 45
 ```
 
 ## Interact with the **TestERC20** smart contract
+
+> [!IMPORTANT]
+> To run only the TestERC20 contract, please comment out the following line in `main.go` -
+> `deploy.RunStorageContract()`
 
 Run the following command to deploy the Test ERC20 token contract, store a value in the deployed smart contract and reading the value from the deployed smart contract.
 

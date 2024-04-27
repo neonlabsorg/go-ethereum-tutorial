@@ -15,7 +15,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-func DeployStorageContract() (string) {
+func deployStorageContract() (string) {
 	auth, client, fromAddress, nonce, gasPrice, _ := connection.GetNextTransaction()
 
 	fmt.Println("Deploying Storage contract...")
@@ -42,7 +42,7 @@ func DeployStorageContract() (string) {
 	return address.String()
 }
 
-func StoreValue(contractAddress string, value int64) {
+func storeValue(contractAddress string, value int64) {
 	auth, client, fromAddress, nonce, gasPrice, _ := connection.GetNextTransaction()
 
 	fmt.Println("Storing value in the Storage contract...")
@@ -95,7 +95,7 @@ func StoreValue(contractAddress string, value int64) {
 	fmt.Printf("Transaction hash: 0x%x\n\n", tx.Hash())	
 }
 
-func ReadValue(contractAddress string) {
+func readValue(contractAddress string) {
 	_, client, _, _, _, _ := connection.GetNextTransaction()
 
 	fmt.Println("Reading value from the Storage contract...")
@@ -111,4 +111,10 @@ func ReadValue(contractAddress string) {
 	}
 	fmt.Println("Returned value:", value)
 	fmt.Println()
+}
+
+func RunStorageContract() {
+	storageContractAddress := deployStorageContract()
+	storeValue(storageContractAddress, 45)
+	readValue(storageContractAddress)
 }

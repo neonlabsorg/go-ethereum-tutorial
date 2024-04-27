@@ -15,7 +15,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-func DeployTestERC20Contract() (string) {
+func deployTestERC20Contract() (string) {
 	auth, client, fromAddress, nonce, gasPrice, _ := connection.GetNextTransaction()
 
 	fmt.Println("Deploying TestERC20 contract...")
@@ -42,7 +42,7 @@ func DeployTestERC20Contract() (string) {
 	return address.String()
 }
 
-func TransferTokens(contractAddress string, value int64) {
+func transferTokens(contractAddress string, value int64) {
 	auth, client, fromAddress, nonce, gasPrice, _ := connection.GetNextTransaction()
 	toAddress := connection.GenerateNewWallet()
 
@@ -105,4 +105,9 @@ func TransferTokens(contractAddress string, value int64) {
 
 	testERC20BalanceOfReceiver, _ = testERC20.BalanceOf(&bind.CallOpts{}, toAddress)
     fmt.Println("Receiver balance after transfer", testERC20BalanceOfReceiver);
+}
+
+func RunTestERC20Contract() {
+	testERC20ContractAddress := deployTestERC20Contract()
+	transferTokens(testERC20ContractAddress, 10)
 }
