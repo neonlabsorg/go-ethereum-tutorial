@@ -86,14 +86,6 @@ go mod tidy
 
 Rename `.env.example` to `.env` and place your private key inside it.
 
-## Create `contractsgo` folder
-
-Create a folder `contractsgo` which will hold the go bindings of the smart contracts.
-
-```sh
-mkdir contractsgo
-```
-
 ## Interact with the **Storage** smart contract
 
 ### Generate the go bindings
