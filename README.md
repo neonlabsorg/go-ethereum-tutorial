@@ -1,6 +1,6 @@
 # Ethereum-based dApp Development with Go using go-ethereum SDK
 
-# Examples deploying smart contracts on Neon EVM Devnet using Go
+## Examples deploying smart contracts on Neon EVM Devnet using Go
 
 This directory contains all the files necessary to deploy the following smart contracts on Neon EVM Devnet-
 
@@ -63,12 +63,22 @@ cd $GOPATH/src
 
 ```sh
 git clone https://github.com/neonlabsorg/go-ethereum-tutorial.git
+cd go-ethereum-tutorial
 ```
 
-## Install the required libraries
+**Note:** All the following commands should be executed inside `go-ethereum-tutorial` folder.
+
+## Install the required libraries inside the `go-ethereum-tutorial` folder
+
+```sh
+npm install
+```
 
 ```sh
 go install github.com/ethereum/go-ethereum/cmd/abigen@latest
+```
+
+```sh
 go mod tidy
 ```
 
@@ -76,7 +86,35 @@ go mod tidy
 
 Rename `.env.example` to `.env` and place your private key inside it.
 
+## Create `contractsgo` folder
+
+Create a folder `contractsgo` which will hold the go bindings of the smart contracts.
+
+```sh
+mkdir contractsgo
+```
+
 ## Interact with the **Storage** smart contract
+
+### Generate the go bindings
+
+1. Run the following commands to generate the smart contract ABI and bytecode.
+
+```sh
+solc --abi ./contracts/Storage.sol -o build
+```
+
+```sh
+solc --bin ./contracts/Storage.sol -o build
+```
+
+2. Run the following command to generate the smart contract go binding inside `contractsgo` folder.
+
+```sh
+ abigen --abi ./build/Storage.abi --pkg contractsgo --type Storage --out ./contractsgo/Storage.go --bin ./build/Storage.bin
+```
+
+### Run the smart contracts functions
 
 > [!IMPORTANT]
 > To run only the Storage contract, please comment out the following line in `main.go` -
@@ -114,6 +152,26 @@ Returned value: 45
 
 ## Interact with the **TestERC20** smart contract
 
+### Generate the go bindings
+
+1. Run the following commands to generate the smart contract ABI and bytecode.
+
+```sh
+solc --abi ./contracts/TestERC20.sol -o build
+```
+
+```sh
+solc --bin ./contracts/TestERC20.sol -o build
+```
+
+2. Run the following command to generate the smart contract go binding inside `contractsgo` folder.
+
+```sh
+ abigen --abi ./build/TestERC20.abi --pkg contractsgo --type Storage --out ./contractsgo/TestERC20.go --bin ./build/TestERC20.bin
+```
+
+### Run the smart contracts functions
+
 > [!IMPORTANT]
 > To run only the TestERC20 contract, please comment out the following line in `main.go` -
 > `deploy.RunStorageContract()`
@@ -145,28 +203,4 @@ Transaction hash: 0x8d2ff2a94f836b25e3ae9cc2f9b95ca73e3b3c1e4a6bf7725890eddd9150
 
 Sender balance after transfer 999999999999999999990
 Receiver balance after transfer 10
-```
-
-<br><br><br>
-
-## Steps to deploy your own smart contract and generate the go bindings
-
-1. Place your smart contract in the `contracts` directory.
-
-2. Generate ABI for the smart contract.
-
-```sh
-solc --abi ./contracts/Example.sol -o build
-```
-
-3. Generate bytecode for the smart contract.
-
-```sh
-solc --bin ./contracts/Example.sol -o build
-```
-
-4. Generate the go binding for the smart contract.
-
-```sh
-abigen --abi ./build/Example.abi --pkg contractsgo --type Example --out ./contractsgo/Example.go --bin ./build/Example.bin
 ```
