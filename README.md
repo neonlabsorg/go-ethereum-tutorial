@@ -47,9 +47,8 @@ export PATH=$GOPATH/bin:$PATH
 
 6. Run `echo $GOPATH` to check if the GOPATH is set correctly in the machine.
 
-:::important
-Neon EVM doesn't support the latest JSON-RPC specifications. Therefore Neon EVM only supports `go-ethereum` versions **<=1.12.2**.
-:::
+> [!IMPORTANT]
+> Neon EVM doesn't support the latest JSON-RPC specifications. Therefore, Neon EVM only supports `go-ethereum` versions **<=1.12.2**.
 
 ## Cloning repository
 
@@ -109,8 +108,7 @@ solc --bin ./contracts/Storage.sol -o build
 ### Run the smart contracts functions
 
 > [!IMPORTANT]
-> To run only the Storage contract, please comment out the following line in `main.go` -
-> `deploy.RunTestERC20Contract()`
+> To run only the Storage contract, please comment out `deploy.RunTestERC20Contract()` in `main.go`.
 
 Run the following command to deploy the Storage contract, store a value in the deployed smart contract and reading the value from the deployed smart contract.
 
@@ -159,16 +157,15 @@ solc --bin ./contracts/TestERC20.sol -o build
 2. Run the following command to generate the smart contract go binding inside `contractsgo` folder.
 
 ```sh
- abigen --abi ./build/TestERC20.abi --pkg contractsgo --type Storage --out ./contractsgo/TestERC20.go --bin ./build/TestERC20.bin
+ abigen --abi ./build/TestERC20.abi --pkg contractsgo --type TestERC20 --out ./contractsgo/TestERC20.go --bin ./build/TestERC20.bin
 ```
 
 ### Run the smart contracts functions
 
 > [!IMPORTANT]
-> To run only the TestERC20 contract, please comment out the following line in `main.go` -
-> `deploy.RunStorageContract()`
+> To run only the TestERC20 contract, please comment out `deploy.RunStorageContract()` in `main.go`.
 
-Run the following command to deploy the Test ERC20 token contract, store a value in the deployed smart contract and reading the value from the deployed smart contract.
+Run the following command to deploy the TestERC20 contract and transfer some TestERC20 tokens from the deployer address to a randomly created address
 
 ```sh
 go run main.go
@@ -189,10 +186,10 @@ The NEON balance of the account is: 310373551028315738437922
 ------------------------------------------------------------------------
 Transferring TestERC20 tokens...
 Estimated gas: 1422000
-Sender balance before transfer 1000000000000000000000
-Receiver balance before transfer 0
+Sender balance before transfer: 1000000000000000000000
+Receiver balance before transfer: 0
 Transaction hash: 0x8d2ff2a94f836b25e3ae9cc2f9b95ca73e3b3c1e4a6bf7725890eddd915029ab
 
-Sender balance after transfer 999999999999999999990
-Receiver balance after transfer 10
+Sender balance after transfer: 999999999999999999990
+Receiver balance after transfer: 10
 ```
