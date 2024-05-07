@@ -83,10 +83,10 @@ func transferTokens(contractAddress string, value int64) {
 	auth.GasPrice = gasPrice
 
 	testERC20BalanceOfSender, _ := testERC20.BalanceOf(&bind.CallOpts{}, fromAddress)
-	fmt.Println("Sender balance before transfer", testERC20BalanceOfSender);
+	fmt.Println("Sender balance before transfer:", testERC20BalanceOfSender);
 
 	testERC20BalanceOfReceiver, _ := testERC20.BalanceOf(&bind.CallOpts{}, toAddress)
-    fmt.Println("Receiver balance before transfer", testERC20BalanceOfReceiver);
+    fmt.Println("Receiver balance before transfer:", testERC20BalanceOfReceiver);
 
 	// Call the transfer function from the smart contract
 	tx, err := testERC20.Transfer(auth, toAddress, big.NewInt(value))
@@ -101,10 +101,10 @@ func transferTokens(contractAddress string, value int64) {
 	fmt.Printf("Transaction hash: 0x%x\n\n", tx.Hash())
 	
 	testERC20BalanceOfSender, _ = testERC20.BalanceOf(&bind.CallOpts{}, fromAddress)
-	fmt.Println("Sender balance after transfer", testERC20BalanceOfSender);
+	fmt.Println("Sender balance after transfer:", testERC20BalanceOfSender);
 
 	testERC20BalanceOfReceiver, _ = testERC20.BalanceOf(&bind.CallOpts{}, toAddress)
-    fmt.Println("Receiver balance after transfer", testERC20BalanceOfReceiver);
+    fmt.Println("Receiver balance after transfer:", testERC20BalanceOfReceiver);
 }
 
 func RunTestERC20Contract() {
