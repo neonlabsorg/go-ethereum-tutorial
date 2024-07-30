@@ -12,7 +12,7 @@ For more details, please refer to these documentations https://goethereumbook.or
 ## Prerequisites
 
 1. The latest Go version.
-2. Solidity compiler version <= 0.8.26 (Neon EVM supports solidity <= 0.8.26).
+2. Solidity compiler version <= 0.8.25 (Neon EVM supports solidity <= 0.8.26 but Homebrew only supports 0.8.25 for now).
 
 ### Solc installation
 
