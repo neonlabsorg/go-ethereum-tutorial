@@ -12,7 +12,7 @@ For more details, please refer to these documentations https://goethereumbook.or
 ## Prerequisites
 
 1. The latest Go version.
-2. Solidity compiler version <= 0.8.25 (Neon EVM supports solidity <= 0.8.26 but Homebrew only supports 0.8.25 for now).
+2. The latest Solidity compiler version.
 
 ### Solc installation
 
@@ -46,9 +46,6 @@ export PATH=$GOPATH/bin:$PATH
 - Run `source ~/.bash_profile` on Linux machines.
 
 6. Run `echo $GOPATH` to check if the GOPATH is set correctly in the machine.
-
-> [!IMPORTANT]
-> Neon EVM doesn't support the latest JSON-RPC specifications. Therefore, Neon EVM only supports `go-ethereum` versions **<=1.12.2**.
 
 ## Cloning repository
 
